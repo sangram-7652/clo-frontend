@@ -1,0 +1,183 @@
+@import "tailwindcss";
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #fff;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --clo-ink: #3e3124;
+  --clo-muted: #6f6256;
+  --clo-bg-soft: #f7f2eb;
+  --clo-surface: #ffffff;
+  --clo-border: #d7c8b8;
+  --clo-gold: #b19777;
+  --clo-purple: #7a0068;
+  --clo-purple-dark: #600053;
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --heading: Georgia, "Times New Roman", serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 16px/150% var(--sans);
+  letter-spacing: 0;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--clo-bg-soft);
+}
+
+#root {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 400;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: 0;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1.12;
+  letter-spacing: 0;
+  margin: 0 0 8px;
+}
+p {
+  margin: 0;
+}
+
+@layer utilities {
+  .bg-clo-soft {
+    background-color: var(--clo-bg-soft);
+  }
+
+  .home-product-card {
+    width: 72vw;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+
+  @media (min-width: 640px) {
+    .home-product-card {
+      width: 38vw;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .home-product-card {
+      width: 28vw;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .home-product-card {
+      width: 18vw;
+    }
+  }
+
+  .clo-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .clo-page-title {
+    font-family: var(--heading);
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: 0;
+  }
+
+  .clo-section-title {
+    font-family: var(--heading);
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 400;
+    line-height: 1.12;
+    letter-spacing: 0;
+  }
+
+  .clo-card-title {
+    font-family: var(--heading);
+    font-size: clamp(1.25rem, 1.6vw, 1.75rem);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0;
+  }
+
+  .clo-display-title {
+    font-family: var(--heading);
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: 0;
+  }
+
+  .clo-body {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 9px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+/* Hide Scrollbar */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
