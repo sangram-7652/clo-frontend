@@ -17,7 +17,13 @@ const CategorySection = () => {
 
   useEffect(() => {
     getCategories()
-      .then((data) => setCategories(Array.isArray(data) ? data : []))
+      .then((data) => {
+        const flatCategories = (data || []).flatMap(
+          (parent) => parent.children || []
+        );
+
+        setCategories(flatCategories);
+      })
       .catch((err) => {
         console.error("Unable to load categories", err);
         setError(true);

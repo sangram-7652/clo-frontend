@@ -4,21 +4,20 @@ import { Link, useNavigate } from "react-router-dom";
 import Topbar from "./Topbar";
 import NavbarSearch from "./NavbarSearch";
 import logo from "../assets/nobgLOGO.png";
+import { getCategories } from "../api/category/categories";
 const menuItems = [
-  "Sale",
-  "Spring Summer 2026",
-  "Shop By Categories",
-  "Special Offer",
-  "What's New",
-  "CLO Collection",
-  "Store Locator",
-  "Track Your Order",
-  "Raise Return",
+  { title: "Home", path: "/" },
+  { title: "About Us", path: "/about" },
+  { title: "Contact Us", path: "/contact" },
+  { title: "FAQs", path: "/faqs" },
+  { title: "Track Your Order", path: "/track-order" },
+  { title: "Terms & Conditions", path: "/terms-condition" },
 ];
-
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [showCategories, setShowCategories] = useState(false);
   const accountHref = localStorage.getItem("token")
     ? "/account"
     : "/account/login";
@@ -59,6 +58,19 @@ const Header = () => {
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const data = await getCategories();
+        setCategories(data);
+      } catch (error) {
+        console.error("Failed to load categories", error);
+      }
+    };
+
+    loadCategories();
+  }, []);
+
   return (
     <>
       {/* Topbar */}
@@ -66,9 +78,8 @@ const Header = () => {
 
       {/* Header */}
       <header
-        className={`fixed left-0 z-40 w-full bg-white text-black shadow-sm transition-all duration-300 ${
-          isScrolled ? "top-0" : "top-10"
-        }`}>
+        className={`fixed left-0 z-40 w-full bg-white text-black shadow-sm transition-all duration-300 ${isScrolled ? "top-0" : "top-10"
+          }`}>
         <div className="mx-auto max-w-7xl px-3 sm:px-4 md:px-8">
           <div className="flex h-18 items-center justify-between">
             {/* Left Side */}
@@ -128,18 +139,16 @@ const Header = () => {
       {/* Overlay */}
       <div
         onClick={() => setIsMenuOpen(false)}
-        className={`fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 ${
-          isMenuOpen
-            ? "opacity-100 visible"
-            : "opacity-0 invisible pointer-events-none"
-        }`}
+        className={`fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 ${isMenuOpen
+          ? "opacity-100 visible"
+          : "opacity-0 invisible pointer-events-none"
+          }`}
       />
 
       {/* Side Canvas Menu */}
       <aside
-        className={`fixed top-0 left-0 z-50 h-full w-[min(320px,86vw)] bg-[#f8f4ef] shadow-2xl transition-transform duration-300 ease-in-out ${
-          isMenuOpen ? "translate-x-0" : "-translate-x-full"
-        }`}>
+        className={`fixed top-0 left-0 z-50 h-full w-[min(320px,86vw)] bg-[#f8f4ef] shadow-2xl transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "-translate-x-full"
+          }`}>
         {/* Top */}
         <div className="flex items-center justify-between border-b border-gray-200 px-6 py-5">
           <h2 className="clo-card-title">CLO</h2>
@@ -155,13 +164,48 @@ const Header = () => {
         <div className="hide-scrollbar flex h-[calc(100%-80px)] flex-col justify-between overflow-y-auto">
           <div className="px-6 py-5">
             <ul className="space-y-1">
+
+              {/* Categories Dropdown */}
+              <li>
+                <button
+                  onClick={() => setShowCategories(!showCategories)}
+                  className="flex w-full items-center justify-between border-b border-gray-200 py-4 text-[15px] uppercase tracking-wide"
+                >
+                  <span>Shop By Categories</span>
+
+                  <ChevronRight
+                    size={18}
+                    className={`transition-transform ${showCategories ? "rotate-90" : ""
+                      }`}
+                  />
+                </button>
+
+                {showCategories && (
+                  <ul className="ml-4 border-l border-gray-200">
+                    {categories.map((category) => (
+                      <li key={category.id}>
+                        <Link
+                          to={`/categories/${category.slug}`}
+                          onClick={() => setIsMenuOpen(false)}
+                          className="block py-3 pl-4 text-sm uppercase hover:text-gray-900"
+                        >
+                          {category.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+
+              {/* Static Menu Items */}
               {menuItems.map((item, index) => (
                 <li key={index}>
                   <Link
-                    to="/"
+                    to={item.path}
                     onClick={() => setIsMenuOpen(false)}
-                    className="group flex items-center justify-between border-b border-gray-200 py-4 text-[15px] uppercase tracking-wide">
-                    <span>{item}</span>
+                    className="group flex items-center justify-between border-b border-gray-200 py-4 text-[15px] uppercase tracking-wide"
+                  >
+                    <span>{item.title}</span>
 
                     <ChevronRight
                       size={18}
