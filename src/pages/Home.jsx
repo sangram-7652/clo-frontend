@@ -8,6 +8,7 @@ import NewLaunches from "../components/Homepage/NewLaunches";
 import ShopByTrends from "../components/Homepage/ShopByTrends";
 import ShopNow from "../components/Homepage/ShopNow";
 import WeddingProducts from "../components/Homepage/WeddingProducts";
+import WatchVideos from "../components/Homepage/WatchVideos";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <HeroSection />
       <CategorySection />
       <NewLaunches />
+      <WatchVideos />
       <BestSellerProducts />
       <WeddingProducts />
       <ShopByTrends />

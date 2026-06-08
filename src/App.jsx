@@ -31,6 +31,7 @@ const Confirmation     = lazy(() => import("./pages/Confirmation"));
 const FAQ              = lazy(() => import("./components/FAQ"));
 const TermsConditions  = lazy(() => import("./components/TermsandConditions"));
 const TrackOrder       = lazy(() => import("./components/TrackOrder"));
+const TrendDetail = lazy(() => import("./pages/TrendDetail"));
 
 // ── 404 ──────────────────────────────────────────────────────────────────
 const NotFound = () => (
@@ -94,6 +95,7 @@ function App() {
           <Route path="faqs" element={<FAQ />} />
           <Route path="terms-condition" element={<TermsConditions />} />
           <Route path="track-order" element={<TrackOrder />} />
+          <Route path="trends/:slug" element={<TrendDetail />} />
 
           {/* Protected routes — require auth token */}
           <Route
