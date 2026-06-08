@@ -15,21 +15,25 @@ const CategorySection = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    getCategories()
-      .then((data) => {
-        const flatCategories = (data || []).flatMap(
-          (parent) => parent.children || []
-        );
+useEffect(() => {
+  getCategories()
+    .then((data) => {
+      const subCategories = [];
 
-        setCategories(flatCategories);
-      })
-      .catch((err) => {
-        console.error("Unable to load categories", err);
-        setError(true);
-      })
-      .finally(() => setLoading(false));
-  }, []);
+      (data || []).forEach((parent) => {
+        if (parent.children?.length) {
+          subCategories.push(...parent.children);
+        }
+      });
+
+      setCategories(subCategories);
+    })
+    .catch((err) => {
+      console.error("Unable to load categories", err);
+      setError(true);
+    })
+    .finally(() => setLoading(false));
+}, []);
 
   if (loading) {
     return (
