@@ -15,18 +15,41 @@ const CategorySection = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
+// useEffect(() => {
+//   getCategories()
+//     .then((data) => {
+//       const subCategories = [];
+
+//       (data || []).forEach((parent) => {
+//         if (parent.children?.length) {
+//           subCategories.push(...parent.children);
+//         }
+//       });
+
+//       setCategories(subCategories);
+//     })
+//     .catch((err) => {
+//       console.error("Unable to load categories", err);
+//       setError(true);
+//     })
+//     .finally(() => setLoading(false));
+// }, []);
+
+
 useEffect(() => {
   getCategories()
     .then((data) => {
-      const subCategories = [];
+      const list = [];
 
-      (data || []).forEach((parent) => {
-        if (parent.children?.length) {
-          subCategories.push(...parent.children);
+      (data || []).forEach((category) => {
+        if (category.children?.length) {
+          list.push(...category.children);
+        } else {
+          list.push(category);
         }
       });
 
-      setCategories(subCategories);
+      setCategories(list);
     })
     .catch((err) => {
       console.error("Unable to load categories", err);
