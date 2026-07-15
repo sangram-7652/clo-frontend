@@ -198,7 +198,7 @@ const CheckoutPage = () => {
   const [checkoutData, setCheckoutData] = useState(null);
   const [loadingSummary, setLoadingSummary] = useState(true);
   const [placingOrder, setPlacingOrder] = useState(false);
-    const [processingPayment, setProcessingPayment] = useState(false);
+  const [processingPayment, setProcessingPayment] = useState(false);
 
   const summary = useMemo(
     () => getCheckoutSummary(checkoutData),
@@ -502,10 +502,10 @@ const CheckoutPage = () => {
               : placingOrder
                 ? "Placing Order..."
                 : `Place Order${
-                  summary.total !== null && !loadingSummary
-                    ? ` - ${formatPrice(summary.total)}`
-                    : ""
-                }`}
+                    summary.total !== null && !loadingSummary
+                      ? ` - ${formatPrice(summary.total)}`
+                      : ""
+                  }`}
           </button>
         </form>
 
@@ -513,9 +513,6 @@ const CheckoutPage = () => {
           <div className="mb-6 flex items-start justify-between gap-3">
             <div>
               <h3 className="clo-card-title">Order Summary</h3>
-              <p className="mt-1 text-[11px] uppercase tracking-[0.12em] text-[#8f765b]">
-                Backend verified
-              </p>
             </div>
             {loadingSummary ? (
               <span className="rounded-full bg-white px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-[#8f765b]">

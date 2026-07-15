@@ -641,9 +641,6 @@ const Cart = () => {
                 <h2 className="my-0 font-serif text-2xl text-[#3e3124]">
                   Order Summary
                 </h2>
-                <p className="mt-1 text-[11px] uppercase tracking-[0.12em] text-[#8f765b]">
-                  Backend verified
-                </p>
               </div>
               {summaryLoading ? (
                 <span className="rounded-full bg-white px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-[#8f765b]">
@@ -689,6 +686,33 @@ const Cart = () => {
                     ? formatPrice(checkoutSummary?.total)
                     : "Unavailable"}
               </span>
+            </div>
+            {/* Coupon Code */}
+            <div className="mb-5 rounded-md border border-[#d7c8b8] bg-white p-3">
+              <label
+                htmlFor="coupon"
+                className="mb-2 block text-[11px] font-medium uppercase tracking-[0.14em] text-[#6f6256]">
+                Have a Coupon?
+              </label>
+
+              <div className="flex gap-2">
+                <input
+                  id="coupon"
+                  type="text"
+                  placeholder="Enter coupon code"
+                  className="flex-1 rounded-md border border-[#d7c8b8] bg-white px-3 py-2 text-sm text-[#3e3124] outline-none transition focus:border-black"
+                />
+
+                <button
+                  type="button"
+                  className="rounded-md bg-black px-4 py-2 text-[11px] font-medium uppercase tracking-[0.14em] text-white transition hover:bg-[#222]">
+                  Apply
+                </button>
+              </div>
+
+              <p className="mt-2 text-xs text-[#8f765b]">
+                Enter your coupon code to get a discount.
+              </p>
             </div>
 
             <button

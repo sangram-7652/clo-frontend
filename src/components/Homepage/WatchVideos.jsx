@@ -44,14 +44,16 @@ export default function WatchVideos() {
         {videos.map((item) => (
           <div
             key={item.id}
-            className="min-w-[280px] max-w-[280px] rounded-lg overflow-hidden border"
+            className="min-w-70 max-w-70 rounded-lg overflow-hidden border"
           >
             <video
               src={`${MEDIA_URL}/${item.video}`}
               controls
               muted
+              autoPlay
+              loop
               playsInline
-              className="w-full h-[420px] object-cover"
+              className="w-full h-105 object-cover"
             />
 
             <div className="p-3">

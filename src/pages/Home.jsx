@@ -21,8 +21,8 @@ const Home = () => {
       <WeddingProducts />
       <ShopByTrends />
       {/* <CollectionsSection /> */}
-      <ShopNow type="women" />
-      <ShopNow type="men" />
+      {/* <ShopNow type="women" />
+      <ShopNow type="men" /> */}
       <DenimSection />
       <CustomerReview />
     </>

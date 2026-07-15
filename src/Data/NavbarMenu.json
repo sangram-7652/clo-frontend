@@ -1,0 +1,465 @@
+[
+  {
+    "id": 1,
+    "title": "MEN",
+    "slug": "men",
+    "path": "/men",
+    "sections": [
+      {
+        "id": 1,
+        "title": "TRENDING COLLECTIONS",
+        "items": [
+          {
+            "id": 1,
+            "name": "Breathe In Linen",
+            "slug": "breathe-in-linen"
+          },
+          {
+            "id": 2,
+            "name": "Airportables",
+            "slug": "airportables"
+          },
+          {
+            "id": 3,
+            "name": "Madagascar Trails",
+            "slug": "madagascar-trails"
+          },
+          {
+            "id": 4,
+            "name": "Edition",
+            "slug": "edition"
+          },
+          {
+            "id": 5,
+            "name": "Bespoke",
+            "slug": "bespoke"
+          },
+          {
+            "id": 6,
+            "name": "Denim World",
+            "slug": "denim-world"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "SHIRTS",
+        "items": [
+          {
+            "id": 1,
+            "name": "Formal Shirts",
+            "slug": "formal-shirts"
+          },
+          {
+            "id": 2,
+            "name": "Casual Shirts",
+            "slug": "casual-shirts"
+          },
+          {
+            "id": 3,
+            "name": "Printed Shirts",
+            "slug": "printed-shirts"
+          },
+          {
+            "id": 4,
+            "name": "All Shirts",
+            "slug": "all-shirts"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "T-SHIRTS",
+        "items": [
+          {
+            "id": 1,
+            "name": "Polo T-Shirts",
+            "slug": "polo-t-shirts"
+          },
+          {
+            "id": 2,
+            "name": "Round Neck T-Shirts",
+            "slug": "round-neck-t-shirts"
+          },
+          {
+            "id": 3,
+            "name": "All T-Shirts",
+            "slug": "all-t-shirts"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "SUITS",
+        "items": [
+          {
+            "id": 1,
+            "name": "Formal Suits",
+            "slug": "formal-suits"
+          },
+          {
+            "id": 2,
+            "name": "Casual Suits",
+            "slug": "casual-suits"
+          },
+          {
+            "id": 3,
+            "name": "All Suits",
+            "slug": "all-suits"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "BOTTOMWEAR",
+        "items": [
+          {
+            "id": 1,
+            "name": "Shorts",
+            "slug": "shorts"
+          },
+          {
+            "id": 2,
+            "name": "Cargos",
+            "slug": "cargos"
+          },
+          {
+            "id": 3,
+            "name": "Track Pants And Joggers",
+            "slug": "track-pants-and-joggers"
+          },
+          {
+            "id": 4,
+            "name": "All Bottomwear",
+            "slug": "all-bottomwear"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "TROUSERS",
+        "items": [
+          {
+            "id": 1,
+            "name": "Formal Trousers",
+            "slug": "formal-trousers"
+          },
+          {
+            "id": 2,
+            "name": "Chinos",
+            "slug": "chinos"
+          },
+          {
+            "id": 3,
+            "name": "All Trousers",
+            "slug": "all-trousers"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "WOMEN",
+    "slug": "women",
+    "path": "/women",
+    "sections": [
+      {
+        "id": 1,
+        "title": "TRENDING COLLECTIONS",
+        "items": [
+          {
+            "id": 1,
+            "name": "Royal Races",
+            "slug": "royal-races"
+          },
+          {
+            "id": 2,
+            "name": "Space Luxe",
+            "slug": "space-luxe"
+          },
+          {
+            "id": 3,
+            "name": "Golden Balance",
+            "slug": "golden-balance"
+          },
+          {
+            "id": 4,
+            "name": "Vegan Handbags",
+            "slug": "vegan-handbags"
+          },
+          {
+            "id": 5,
+            "name": "Leopards And Lilies",
+            "slug": "leopards-and-lilies"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "TOPS AND TEES",
+        "items": [
+          {
+            "id": 1,
+            "name": "Formal Tops",
+            "slug": "formal-tops"
+          },
+          {
+            "id": 2,
+            "name": "Casual Tops",
+            "slug": "casual-tops"
+          },
+          {
+            "id": 3,
+            "name": "Party Wear Tops",
+            "slug": "party-wear-tops"
+          },
+          {
+            "id": 4,
+            "name": "All Tops And Tees",
+            "slug": "all-tops-and-tees"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "SHIRTS",
+        "items": [
+          {
+            "id": 1,
+            "name": "Formal Shirts",
+            "slug": "formal-shirts"
+          },
+          {
+            "id": 2,
+            "name": "Casual Shirts",
+            "slug": "casual-shirts"
+          },
+          {
+            "id": 3,
+            "name": "All Shirts",
+            "slug": "all-shirts"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "DRESSES",
+        "items": [
+          {
+            "id": 1,
+            "name": "Formal Dresses",
+            "slug": "formal-dresses"
+          },
+          {
+            "id": 2,
+            "name": "Casual Dresses",
+            "slug": "casual-dresses"
+          },
+          {
+            "id": 3,
+            "name": "Party Wear Dresses",
+            "slug": "party-wear-dresses"
+          },
+          {
+            "id": 4,
+            "name": "All Dresses",
+            "slug": "all-dresses"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "BOTTOMWEAR",
+        "items": [
+          {
+            "id": 1,
+            "name": "Skirts",
+            "slug": "skirts"
+          },
+          {
+            "id": 2,
+            "name": "Shorts",
+            "slug": "shorts"
+          },
+          {
+            "id": 3,
+            "name": "Track Pants And Joggers",
+            "slug": "track-pants-and-joggers"
+          },
+          {
+            "id": 4,
+            "name": "All Bottomwear",
+            "slug": "all-bottomwear"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "TROUSERS",
+        "items": [
+          {
+            "id": 1,
+            "name": "Formal Trousers",
+            "slug": "formal-trousers"
+          },
+          {
+            "id": 2,
+            "name": "Casual Trousers",
+            "slug": "casual-trousers"
+          },
+          {
+            "id": 3,
+            "name": "All Trousers",
+            "slug": "all-trousers"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "JUST IN",
+    "slug": "just-in",
+    "path": "/just-in",
+    "sections": [
+      {
+        "id": 1,
+        "title": "MEN",
+        "items": [
+          {
+            "id": 1,
+            "name": "Shirts",
+            "slug": "shirts"
+          },
+          {
+            "id": 2,
+            "name": "T-Shirts",
+            "slug": "t-shirts"
+          },
+          {
+            "id": 3,
+            "name": "Jeans",
+            "slug": "jeans"
+          },
+          {
+            "id": 4,
+            "name": "Trousers",
+            "slug": "trousers"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "WOMEN",
+        "items": [
+          {
+            "id": 1,
+            "name": "Shirts",
+            "slug": "shirts"
+          },
+          {
+            "id": 2,
+            "name": "Tops & Tees",
+            "slug": "tops-and-tees"
+          },
+          {
+            "id": 3,
+            "name": "Jeans",
+            "slug": "jeans"
+          },
+          {
+            "id": 4,
+            "name": "Trousers",
+            "slug": "trousers"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "SALE",
+    "slug": "sale",
+    "path": "/sale",
+    "sections": [
+      {
+        "id": 1,
+        "title": "MEN",
+        "items": [
+          {
+            "id": 1,
+            "name": "Shirts",
+            "slug": "shirts"
+          },
+          {
+            "id": 2,
+            "name": "T-Shirts",
+            "slug": "t-shirts"
+          },
+          {
+            "id": 3,
+            "name": "Trousers",
+            "slug": "trousers"
+          },
+          {
+            "id": 4,
+            "name": "Jeans",
+            "slug": "jeans"
+          },
+          {
+            "id": 5,
+            "name": "Blazers",
+            "slug": "blazers"
+          },
+          {
+            "id": 6,
+            "name": "Suits",
+            "slug": "suits"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "WOMEN",
+        "items": [
+          {
+            "id": 1,
+            "name": "Tops & Tees",
+            "slug": "tops-and-tees"
+          },
+          {
+            "id": 2,
+            "name": "Shirts",
+            "slug": "shirts"
+          },
+          {
+            "id": 3,
+            "name": "Dresses",
+            "slug": "dresses"
+          },
+          {
+            "id": 4,
+            "name": "Trousers",
+            "slug": "trousers"
+          },
+          {
+            "id": 5,
+            "name": "Jeans",
+            "slug": "jeans"
+          },
+          {
+            "id": 6,
+            "name": "Blazers",
+            "slug": "blazers"
+          },
+          {
+            "id": 7,
+            "name": "Handbags",
+            "slug": "handbags"
+          }
+        ]
+      }
+    ]
+  }
+]

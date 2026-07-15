@@ -13,7 +13,9 @@ import { getProductImageUrl } from "../../api/home";
 
 const sizeOrder = ["XS", "S", "M", "L", "XL", "XXL"];
 
-const colorCodes = {
+// Fallback swatch colors, only used when the backend doesn't send a hex
+// code for a variant's color (see colorHexMap below).
+const fallbackColorCodes = {
   black: "#111111",
   brown: "#7c4f35",
   green: "#2f6b43",
@@ -48,7 +50,7 @@ const getVariantImages = (variant) => {
 const ProductDetailView = ({
   product,
   onAddToBag,
-  onBuyNow,
+
   onToggleWishlist,
   isWishlisted = false,
   isAddingToCart = false,
@@ -68,6 +70,25 @@ const ProductDetailView = ({
     ],
     [variants],
   );
+
+  // Prefer a real hex/color code coming from the backend variant data.
+  // Adjust the field names below (color_hex / color_code / hex) to match
+  // whatever your API actually returns.
+  const colorHexMap = useMemo(() => {
+    const map = { ...fallbackColorCodes };
+
+    variants.forEach((variant) => {
+      const key = variant.color?.toLowerCase();
+      const hex = variant.color_hex || variant.color_code || variant.hex;
+
+      if (key && hex) {
+        map[key] = hex;
+      }
+    });
+
+    return map;
+  }, [variants]);
+
   const galleryImages = useMemo(() => {
     const apiImages = (product?.images || [])
       .map((image) => image?.image || image)
@@ -120,23 +141,9 @@ const ProductDetailView = ({
     onAddToBag?.(getCartProduct());
   };
 
-  const handleBuyNow = () => {
-    onBuyNow?.({
-      ...product,
-      title: formatName(product.name),
-      images: galleryImages,
-      price: salePrice,
-      oldPrice: product.price,
-      selectedSize,
-      selectedColor,
-      selectedVariant,
-      quantity,
-    });
-  };
-
   if (!product) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-clo-soft px-4 text-center text-[#3e3124]">
+      <div className="flex min-h-screen items-center justify-center bg-clo-soft px-4 text-center">
         Product not found
       </div>
     );
@@ -175,7 +182,7 @@ const ProductDetailView = ({
               ))}
             </div>
 
-            <div className="aspect-4/5 max-h-155 flex-1 overflow-hidden rounded-md bg-[#eee4d8]">
+            <div className="aspect-4/5 max-h-155 flex-1 overflow-hidden rounded-md">
               {selectedImage ? (
                 <img
                   src={selectedImage}
@@ -192,7 +199,7 @@ const ProductDetailView = ({
             </div>
           </div>
 
-          <div className="flex flex-col text-[#3e3124]">
+          <div className="flex flex-col">
             <div className="mb-3 flex flex-wrap items-center gap-2">
               {product.is_bestseller ? (
                 <span className="border border-[#d7c8b8] px-2.5 py-1 text-[9px] uppercase leading-none tracking-[1.2px]">
@@ -201,7 +208,7 @@ const ProductDetailView = ({
               ) : null}
               {product.is_wedding ? (
                 <span className="border border-[#d7c8b8] px-2.5 py-1 text-[9px] uppercase leading-none tracking-[1.2px]">
-                  Wedding Edit
+                  Wedding
                 </span>
               ) : null}
               {product.sku ? (
@@ -211,36 +218,34 @@ const ProductDetailView = ({
               ) : null}
             </div>
 
-            <h1 className="my-0 mb-1.5 font-(--heading) text-lg leading-snug text-[#3e3124] md:text-xl">
+            {/* Product Name */}
+            <div className="mb-1 text-4xl font-medium leading-tight text-black">
               {formatName(product.name)}
-            </h1>
+            </div>
 
-            <div className="mb-1 flex flex-wrap items-center gap-2.5">
-              <span className="text-base font-medium">
+            <div className="mb-4 mt-2 flex flex-wrap items-center gap-3">
+              <span className="text-xl font-medium text-black">
                 {formatPrice(salePrice)}
               </span>
               {hasDiscount ? (
-                <span className="text-xs text-gray-400 line-through">
+                <span className="text-xl text-gray-400 line-through">
                   {formatPrice(product.price)}
                 </span>
               ) : null}
             </div>
 
-            <p className="mb-3 text-[9px] leading-none text-gray-500">
-              Inclusive of all taxes
-            </p>
-
+            {/* Size */}
             {sizes.length ? (
-              <div className="mb-4">
+              <div className="mb-5">
                 <div className="mb-2 flex items-center justify-between gap-4">
-                  <h2 className="text-[9px] font-medium uppercase leading-none tracking-[1.3px] text-[#3e3124]">
+                  <span className="text-xl font-medium uppercase leading-none text-black">
                     Size
-                  </h2>
-                  <button
+                  </span>
+                  {/* <button
                     type="button"
-                    className="text-[9px] uppercase leading-none tracking-[1.3px] text-[#8f765b]">
+                    className="text-sm uppercase leading-none">
                     Size Guide
-                  </button>
+                  </button> */}
                 </div>
 
                 <div className="flex flex-wrap gap-2">
@@ -252,10 +257,10 @@ const ProductDetailView = ({
                         setSelectedSize(size);
                         setQuantity(1);
                       }}
-                      className={`min-h-8 min-w-10 border px-3 text-[9px] font-medium transition ${
+                      className={`flex h-9 min-w-11 items-center justify-center border px-3 text-[11px] font-medium tracking-[0.5px] transition-colors duration-150 ${
                         selectedSize === size
                           ? "border-black bg-black text-white"
-                          : "border-[#d7c8b8] bg-transparent hover:border-black"
+                          : "border-[#d7c8b8] text-[#3e3124] hover:border-black"
                       }`}>
                       {size}
                     </button>
@@ -264,11 +269,12 @@ const ProductDetailView = ({
               </div>
             ) : null}
 
+            {/* Color */}
             {colors.length ? (
-              <div className="mb-4">
-                <h2 className="mb-2 text-[9px] font-medium uppercase leading-none tracking-[1.3px] text-[#3e3124]">
+              <div className="mb-5">
+                <span className="mb-2 block text-xl font-medium uppercase text-black">
                   Color
-                </h2>
+                </span>
                 <div className="flex flex-wrap gap-2">
                   {colors.map((color) => (
                     <button
@@ -278,31 +284,34 @@ const ProductDetailView = ({
                         setSelectedColor(color);
                         setQuantity(1);
                       }}
-                      className={`flex min-h-8 items-center gap-2 border px-2.5 transition ${
+                      className={`flex h-9 items-center gap-2 rounded-full border px-3 transition-colors duration-150 ${
                         selectedColor === color
-                          ? "border-black"
+                          ? "border-black "
                           : "border-[#d7c8b8] hover:border-black"
                       }`}
                       aria-pressed={selectedColor === color}>
                       <span
-                        className="h-4 w-4 rounded-full border border-black/10"
+                        className="h-3.5 w-3.5 rounded-full border border-black/10 shadow-sm"
                         style={{
                           backgroundColor:
-                            colorCodes[color.toLowerCase()] || "#d7c8b8",
+                            colorHexMap[color.toLowerCase()] || "#d7c8b8",
                         }}
                       />
-                      <span className="text-[10px]">{color}</span>
+                      <span className="text-[11px] font-medium tracking-[0.3px] text-[#3e3124]">
+                        {color}
+                      </span>
                     </button>
                   ))}
                 </div>
               </div>
             ) : null}
 
+            {/* Quantity */}
             <div className="mb-4 flex flex-wrap items-end gap-4">
               <div>
-                <h2 className="mb-2 text-[9px] font-medium uppercase leading-none tracking-[1.3px] text-[#3e3124]">
+                <div className="mb-2 text-[9px] font-medium uppercase leading-none tracking-[1.3px] text-[#3e3124]">
                   Quantity
-                </h2>
+                </div>
                 <div className="flex w-fit items-center border border-[#d7c8b8]">
                   <button
                     type="button"
@@ -338,34 +347,28 @@ const ProductDetailView = ({
                 type="button"
                 onClick={handleAddToBag}
                 disabled={isAddingToCart}
-                className="flex min-h-10 items-center justify-center gap-2 bg-black px-4 py-2.5 text-[10px] font-medium uppercase tracking-[1.2px] text-white transition hover:bg-[#222] disabled:cursor-not-allowed disabled:bg-[#777]">
+                className="flex w-full items-center justify-center gap-2 rounded-md bg-black px-6 py-3 text-[10px] uppercase leading-none tracking-[1.2px] text-white">
                 <ShoppingBag size={16} />
                 {isAddingToCart ? "Adding..." : "Add To Bag"}
               </button>
               <button
                 type="button"
-                onClick={handleBuyNow}
-                disabled={isAddingToCart}
-                className="flex min-h-10 items-center justify-center border border-black px-4 py-2.5 text-[10px] font-medium uppercase tracking-[1.2px] transition hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:border-[#777] disabled:text-[#777]">
-                Buy Now
+                onClick={() => onToggleWishlist?.(getCartProduct())}
+                disabled={isUpdatingWishlist}
+                className="flex w-full items-center justify-center gap-2 rounded-md bg-black px-6 py-3 text-[10px] uppercase leading-none tracking-[1.2px] text-white">
+                <Heart
+                  size={15}
+                  className={
+                    isWishlisted ? "fill-yellow-500 text-yellow-500" : ""
+                  }
+                />
+                {isUpdatingWishlist
+                  ? "Updating..."
+                  : isWishlisted
+                    ? "Remove From Wishlist"
+                    : "Add To Wishlist"}
               </button>
             </div>
-
-            <button
-              type="button"
-              onClick={() => onToggleWishlist?.(getCartProduct())}
-              disabled={isUpdatingWishlist}
-              className="mb-4 flex min-h-9 w-full items-center justify-center gap-2 border border-[#d7c8b8] px-4 py-2 text-[10px] font-medium uppercase tracking-[1.2px] transition hover:border-black">
-              <Heart
-                size={15}
-                className={isWishlisted ? "fill-yellow-500 text-yellow-500" : ""}
-              />
-              {isUpdatingWishlist
-                ? "Updating..."
-                : isWishlisted
-                  ? "Remove From Wishlist"
-                  : "Add To Wishlist"}
-            </button>
 
             {description?.length ? (
               <div className="mb-4 space-y-1.5 text-xs leading-5 text-gray-600">

@@ -7,6 +7,43 @@ import { getProductBySlug } from "../api/products/detail";
 import { addToCart as addCartItem } from "../api/cart/cart";
 import { useWishlist } from "../context/WishlistContext";
 
+const buildCartPayload = (cartProduct) => {
+  const productId = cartProduct.id || cartProduct._id;
+
+  if (!productId) return null;
+
+  const payload = {
+    product_id: productId,
+    qty: cartProduct.quantity,
+  };
+
+  const variantId =
+    cartProduct.selectedVariant?.id || cartProduct.selectedVariant?._id;
+
+  if (variantId) {
+    payload.product_variant_id = variantId;
+  }
+
+  if (cartProduct.selectedSize) {
+    payload.size = cartProduct.selectedSize;
+  }
+
+  if (cartProduct.selectedColor) {
+    payload.color = cartProduct.selectedColor;
+  }
+
+  return payload;
+};
+
+const buildAddedItemState = (cartProduct) => ({
+  ...cartProduct,
+  product: cartProduct,
+  qty: cartProduct.quantity,
+  variant: cartProduct.selectedVariant,
+  size: cartProduct.selectedSize,
+  color: cartProduct.selectedColor,
+});
+
 const ProductDetail = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
@@ -64,31 +101,11 @@ const ProductDetail = () => {
   }, [productSlug]);
 
   const handleAddToBag = async (cartProduct) => {
-    const productId = cartProduct.id || cartProduct._id;
+    const payload = buildCartPayload(cartProduct);
 
-    if (!productId) {
+    if (!payload) {
       toast.error("Product id is missing.");
       return;
-    }
-
-    const payload = {
-      product_id: productId,
-      qty: cartProduct.quantity,
-    };
-
-    const variantId =
-      cartProduct.selectedVariant?.id || cartProduct.selectedVariant?._id;
-
-    if (variantId) {
-      payload.product_variant_id = variantId;
-    }
-
-    if (cartProduct.selectedSize) {
-      payload.size = cartProduct.selectedSize;
-    }
-
-    if (cartProduct.selectedColor) {
-      payload.color = cartProduct.selectedColor;
     }
 
     try {
@@ -96,16 +113,7 @@ const ProductDetail = () => {
       await addCartItem(payload);
       toast.success("Added to cart");
       navigate("/cart", {
-        state: {
-          addedItem: {
-            ...cartProduct,
-            product: cartProduct,
-            qty: cartProduct.quantity,
-            variant: cartProduct.selectedVariant,
-            size: cartProduct.selectedSize,
-            color: cartProduct.selectedColor,
-          },
-        },
+        state: { addedItem: buildAddedItemState(cartProduct) },
       });
     } catch (requestError) {
       const message =
