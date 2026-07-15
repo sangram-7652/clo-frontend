@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Heart, ShoppingBag, User, X, ChevronRight } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -7,9 +7,39 @@ import NavbarSearch from "./NavbarSearch";
 import MegaMenu from "./MegaMenu";
 
 import logo from "../assets/nobgLOGO.png";
-import navbarMenu from "../data/NavbarMenu.json";
 
 import { getCategories } from "../api/category/categories";
+
+const staticNavbarLinks = [
+  { id: "just-in", title: "JUST IN", slug: "just-in", path: "/just-in" },
+  { id: "sale", title: "SALE", slug: "sale", path: "/sale" },
+];
+
+const createNavbarMenuFromCategories = (apiCategories) => {
+  const categoryMenus = apiCategories
+    .filter((category) => category?.slug)
+    .map((category) => ({
+      id: category.id,
+      title: category.name,
+      slug: category.slug,
+      path: `/categories/${category.slug}`,
+      sections: (category.children || []).map((section) => ({
+        id: section.id,
+        title: section.name,
+        items: section.children?.length
+          ? section.children
+          : [
+              {
+                id: section.id,
+                name: section.name,
+                slug: section.slug,
+              },
+            ],
+      })),
+    }));
+
+  return [...categoryMenus, ...staticNavbarLinks];
+};
 
 const menuItems = [
   { title: "Home", path: "/" },
@@ -30,6 +60,10 @@ const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(null);
 
   const navigate = useNavigate();
+  const desktopNavbarMenu = useMemo(
+    () => createNavbarMenuFromCategories(categories),
+    [categories],
+  );
 
   const accountHref = localStorage.getItem("token")
     ? "/account"
@@ -113,19 +147,21 @@ const Navbar = () => {
               {/* Desktop Navigation */}
 
               <nav className="hidden items-center gap-6 lg:flex">
-                {navbarMenu.map((menu) => (
+                {desktopNavbarMenu.map((menu) => (
                   <div
                     key={menu.id}
                     onMouseEnter={() => setActiveMenu(menu.slug)}>
-                    <Link
-                      to={menu.path}
-                      className={`block border-b-2 py-6 text-sm uppercase tracking-wider transition-colors ${
+                    <button
+                      type="button"
+                      onClick={() => setActiveMenu(menu.slug)}
+                      onFocus={() => setActiveMenu(menu.slug)}
+                      className={`block cursor-pointer border-b-2 bg-transparent py-6 text-sm uppercase tracking-wider transition-colors ${
                         activeMenu === menu.slug
                           ? "border-black"
                           : "border-transparent"
                       }`}>
                       {menu.title}
-                    </Link>
+                    </button>
                   </div>
                 ))}
               </nav>
@@ -188,7 +224,7 @@ const Navbar = () => {
 
         {/* ================= DESKTOP MEGA MENU ================= */}
 
-        {navbarMenu.map(
+        {desktopNavbarMenu.map(
           (menu) =>
             activeMenu === menu.slug &&
             menu.sections?.length > 0 && (

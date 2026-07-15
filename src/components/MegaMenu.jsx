@@ -16,7 +16,7 @@ const MegaMenu = ({ menu, onClose }) => {
               {section.items.map((item) => (
                 <li key={item.id}>
                   <Link
-                    to={`/${menu.slug}/${item.slug}`}
+                    to={`/categories/${item.slug}`}
                     onClick={onClose}
                     className="text-sm text-gray-600 transition hover:text-black"
                   >

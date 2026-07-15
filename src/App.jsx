@@ -16,21 +16,22 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 
 // ── Lazy imports (loaded only when route is visited) ─────────────────────
-const About            = lazy(() => import("./pages/About"));
-const ProductDetail    = lazy(() => import("./pages/ProductDetail"));
-const Login            = lazy(() => import("./pages/Login"));
-const UserProfile      = lazy(() => import("./pages/UserProfile"));
-const Orders           = lazy(() => import("./pages/Orders"));
-const OrderDetail      = lazy(() => import("./pages/OrderDetail"));
-const Contact          = lazy(() => import("./pages/Contact"));
-const Wishlist         = lazy(() => import("./pages/Wishlist"));
-const Cart             = lazy(() => import("./pages/Cart"));
+const About = lazy(() => import("./pages/About"));
+const ProductDetail = lazy(() => import("./pages/ProductDetail"));
+const Login = lazy(() => import("./pages/Login"));
+const UserProfile = lazy(() => import("./pages/UserProfile"));
+const Orders = lazy(() => import("./pages/Orders"));
+const OrderDetail = lazy(() => import("./pages/OrderDetail"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Wishlist = lazy(() => import("./pages/Wishlist"));
+const Cart = lazy(() => import("./pages/Cart"));
 const CategoryProducts = lazy(() => import("./pages/CategoryProducts"));
-const CheckoutPage     = lazy(() => import("./pages/Checkout"));
-const Confirmation     = lazy(() => import("./pages/Confirmation"));
-const FAQ              = lazy(() => import("./components/FAQ"));
-const TermsConditions  = lazy(() => import("./components/TermsandConditions"));
-const TrackOrder       = lazy(() => import("./components/TrackOrder"));
+const CheckoutPage = lazy(() => import("./pages/Checkout"));
+const Confirmation = lazy(() => import("./pages/Confirmation"));
+const FAQ = lazy(() => import("./components/FAQ"));
+const ReturnExchange = lazy(() => import("./components/ReturnExchange"));
+const TermsConditions = lazy(() => import("./components/TermsandConditions"));
+const TrackOrder = lazy(() => import("./components/TrackOrder"));
 const TrendDetail = lazy(() => import("./pages/TrendDetail"));
 
 // ── 404 ──────────────────────────────────────────────────────────────────
@@ -43,8 +44,7 @@ const NotFound = () => (
     </p>
     <a
       href="/"
-      className="rounded-md bg-black px-6 py-2.5 text-sm font-medium text-white transition hover:bg-[#222]"
-    >
+      className="rounded-md bg-black px-6 py-2.5 text-sm font-medium text-white transition hover:bg-[#222]">
       Back to Home
     </a>
   </section>
@@ -93,6 +93,7 @@ function App() {
           <Route path="order-success" element={<Confirmation />} />
           <Route path="order-confirmed" element={<Confirmation />} />
           <Route path="faqs" element={<FAQ />} />
+          <Route path="return-exchange" element={<ReturnExchange />} />
           <Route path="terms-condition" element={<TermsConditions />} />
           <Route path="track-order" element={<TrackOrder />} />
           <Route path="trends/:slug" element={<TrendDetail />} />
@@ -100,27 +101,51 @@ function App() {
           {/* Protected routes — require auth token */}
           <Route
             path="account"
-            element={<ProtectedRoute><UserProfile /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <UserProfile />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="account/orders"
-            element={<ProtectedRoute><Orders /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <Orders />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="account/orders/:orderId"
-            element={<ProtectedRoute><OrderDetail /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <OrderDetail />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="wishlist"
-            element={<ProtectedRoute><Wishlist /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <Wishlist />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="cart"
-            element={<ProtectedRoute><Cart /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <Cart />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="checkout"
-            element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <CheckoutPage />
+              </ProtectedRoute>
+            }
           />
 
           {/* 404 catch-all */}

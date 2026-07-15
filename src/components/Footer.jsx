@@ -158,9 +158,11 @@ const Footer = () => {
               </li>
             </a>
 
-            <li className="cursor-pointer hover:text-black transition duration-300">
-              Returns / Exchange
-            </li>
+            <a href="/return-exchange">
+              <li className="cursor-pointer hover:text-black transition duration-300">
+                Returns / Exchange
+              </li>
+            </a>
 
             <li>
               <a
